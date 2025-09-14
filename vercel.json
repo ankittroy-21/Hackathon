@@ -65,15 +65,6 @@
       ]
     }
   ],
-  "env": {
-    "GEMINI_API_KEY": "@gemini_api_key",
-    "HUGGINGFACE_API_KEY": "@huggingface_api_key",
-    "OPENAI_API_KEY": "@openai_api_key",
-    "SUPABASE_URL": "@supabase_url",
-    "SUPABASE_ANON_KEY": "@supabase_anon_key",
-    "HEALTH_API_KEY": "@health_api_key",
-    "PYTHON_BACKEND_URL": "@python_backend_url"
-  },
   "github": {
     "autoAlias": true
   }
