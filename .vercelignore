@@ -1,0 +1,10 @@
+node_modules
+.env
+.env.local
+.git
+*.py
+*.pyc
+__pycache__
+requirements.txt
+.venv
+.python-version

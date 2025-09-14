@@ -12,7 +12,9 @@
     "test": "node -e \"console.log('Health Assistant Ready for Deployment!')\"",
     "setup": "cp .env.example .env && echo 'Please fill in your credentials in .env file'"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
   "devDependencies": {
     "vercel": "^32.5.0"
   },
