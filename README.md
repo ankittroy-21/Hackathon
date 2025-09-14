@@ -49,6 +49,47 @@ This project provides **accessible healthcare information** to rural areas of In
 - **Encrypted Storage** - Secure database with automatic encryption
 - **Production Ready** - Comprehensive security audit passed
 
+## ⚡ One-Click Deploy to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fankittroy-21%2FHackathon&env=GEMINI_API_KEY,HUGGINGFACE_API_KEY,SUPABASE_URL,SUPABASE_ANON_KEY&envDescription=AI%20API%20keys%20and%20database%20credentials%20needed%20for%20health%20assistant&envLink=https%3A%2F%2Fgithub.com%2Fankittroy-21%2FHackathon%23-complete-vercel-deployment-guide&project-name=health-assistant-ai&repository-name=health-assistant-ai)
+
+**🔗 Quick Links:**
+- 🔑 [Get Gemini API Key (Free)](https://makersuite.google.com/app/apikey) 
+- 🤗 [Get Hugging Face Token (Free)](https://huggingface.co/settings/tokens)
+- 🗃️ [Create Supabase Database (Free)](https://supabase.com/dashboard/projects)
+- 📖 [Complete Setup Guide](#-complete-vercel-deployment-guide)
+
+**🎯 This button will:**
+- ✅ **Clone** your repository automatically
+- ✅ **Pre-configure** environment variables
+- ✅ **Deploy** to Vercel instantly
+- ✅ **Open** environment setup page
+
+**📋 Have these ready before clicking:**
+- Gemini API Key (free) or Hugging Face Token (free)
+- Supabase URL and Anonymous Key (free)
+
+### 🎬 Deployment Flow
+```
+1. Click "Deploy with Vercel" button above
+   ↓
+2. Vercel opens with your repo pre-selected
+   ↓
+3. Add environment variables (pre-configured form)
+   ↓
+4. Click "Deploy" 
+   ↓
+5. Wait 2-3 minutes
+   ↓
+6. Your app is live! 🎉
+```
+
+**🔄 Alternative Deploy Options:**
+- [Deploy to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/ankittroy-21/Hackathon)
+- [Fork on GitHub](https://github.com/ankittroy-21/Hackathon/fork) → Manual Setup
+
+---
+
 ## 🚀 Quick Start (Beginner-Friendly)
 
 ### Step 1: Get Your API Credentials
@@ -76,6 +117,28 @@ This project provides **accessible healthcare information** to rural areas of In
 3. Subscribe (many have free tiers)
 4. Copy your API key for enhanced health data
 
+#### 1.4 Hugging Face API Key (Free AI Alternative)
+1. Visit [Hugging Face](https://huggingface.co/)
+2. **Sign up/Login** to your account
+3. **Go to Settings** → Click your profile picture → Settings
+4. **Navigate to Access Tokens** → Left sidebar → "Access Tokens"
+5. **Create New Token**:
+   - Name: `Health Assistant API`
+   - Role: `Read` (sufficient for API access)
+   - Click **"Create token"**
+6. **Copy your token** - starts with `hf_...`
+7. **Keep it secure** - treat like a password
+
+**Why Hugging Face?**
+- ✅ **Completely FREE** - No billing required
+- ✅ **High-quality AI** - Good for health responses  
+- ✅ **Backup option** - Works when other APIs fail
+- ✅ **Easy setup** - Just need an account
+
+**Usage Limits (Free Tier):**
+- 1,000 requests per hour
+- Perfect for testing and small deployments
+
 ### Step 2: Fork and Setup Repository
 
 ```bash
@@ -95,8 +158,17 @@ cp .env.example .env
 Edit the `.env` file with your actual credentials:
 
 ```bash
-# Required API Keys
+# AI Provider Configuration (Priority Order)
+# 1. GEMINI API (FREE TIER - RECOMMENDED)
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# 2. HUGGING FACE API (FREE BACKUP)
+HUGGINGFACE_API_KEY=hf_your_actual_huggingface_token_here
+
+# 3. OPENAI API (OPTIONAL - REQUIRES BILLING)
 OPENAI_API_KEY=sk-your-actual-openai-key-here
+
+# Database Configuration
 SUPABASE_URL=https://your-project-id.supabase.co
 SUPABASE_ANON_KEY=eyJhbGc...your-actual-supabase-key
 
@@ -121,18 +193,106 @@ In Vercel dashboard:
 1. Go to Project → Settings → Environment Variables
 2. Add each variable from your `.env` file:
 
-| Variable Name | Example Value | Environment |
-|---------------|---------------|-------------|
-| `OPENAI_API_KEY` | `sk-proj-abc123...` | Production, Preview, Development |
-| `SUPABASE_URL` | `https://xyz.supabase.co` | Production, Preview, Development |
-| `SUPABASE_ANON_KEY` | `eyJhbGc...` | Production, Preview, Development |
-| `HEALTH_API_KEY` | `your-health-key` | Production, Preview, Development |
+| Variable Name | Example Value | Environment | Required |
+|---------------|---------------|-------------|----------|
+| `GEMINI_API_KEY` | `AIza...` | Production, Preview, Development | ✅ Recommended |
+| `HUGGINGFACE_API_KEY` | `hf_abc123...` | Production, Preview, Development | ✅ Backup |
+| `OPENAI_API_KEY` | `sk-proj-abc123...` | Production, Preview, Development | ⚠️ Optional |
+| `SUPABASE_URL` | `https://xyz.supabase.co` | Production, Preview, Development | ✅ Required |
+| `SUPABASE_ANON_KEY` | `eyJhbGc...` | Production, Preview, Development | ✅ Required |
+| `HEALTH_API_KEY` | `your-health-key` | Production, Preview, Development | ⭕ Optional |
+
+**💡 Pro Tip:** You only need **ONE** AI provider key. The app will work with:
+- **Gemini only** (recommended for free usage)
+- **Hugging Face only** (free backup option)  
+- **OpenAI only** (if you have billing setup)
+- **No API keys** (enhanced fallback responses)
 
 #### 4.3 Deploy and Test
 1. Click "Deploy" in Vercel dashboard
 2. Wait for deployment (2-3 minutes)
 3. **Database auto-creates** on first visit
 4. Test your live app at the provided Vercel URL
+
+## 🚀 Complete Vercel Deployment Guide
+
+### 🎯 Method 1: One-Click Deploy (Recommended)
+
+**Use the button above** ⬆️ for instant deployment, or follow manual steps below.
+
+### 🛠️ Method 2: Manual Deployment
+
+#### Step 1: Import Repository to Vercel
+1. **Visit** [vercel.com](https://vercel.com) and sign in with GitHub
+2. **Click "New Project"**
+3. **Search** for your `Hackathon` repository
+4. **Click "Import"** next to your repository
+5. **Configure Project:**
+   - Project Name: `health-assistant-ai` (or keep `Hackathon`)
+   - Framework Preset: **"Other"**
+   - Root Directory: `./` (default)
+   - Build Command: Leave empty
+   - Output Directory: Leave empty
+
+### Step 2: Add Environment Variables (Before Deployment)
+**⚠️ Important:** Add these BEFORE clicking deploy!
+
+1. **Scroll down** to "Environment Variables" section
+2. **Add variables one by one:**
+
+```bash
+# Minimum Required (Choose ONE AI provider)
+GEMINI_API_KEY = your_actual_gemini_key
+# OR
+HUGGINGFACE_API_KEY = hf_your_actual_token
+
+# Database (Required)
+SUPABASE_URL = https://your-project.supabase.co
+SUPABASE_ANON_KEY = eyJhbGc...your_key
+
+# Optional
+HEALTH_API_KEY = your_health_key
+```
+
+**Environment Setting:** Select **"Production, Preview, and Development"** for each variable.
+
+### Step 3: Deploy
+1. **Click "Deploy"** button
+2. **Wait 2-3 minutes** for build completion
+3. **Success!** Your app is now live
+
+### Step 4: Test Your Deployment
+**Your app will be available at:** `https://your-project-name.vercel.app`
+
+**Test these features:**
+- ✅ Homepage loads
+- ✅ Voice input works (microphone button)
+- ✅ Text input responds
+- ✅ Multi-language support
+- ✅ Mobile responsiveness
+
+### Step 5: Custom Domain (Optional)
+1. **Go to** Project → Settings → Domains
+2. **Add your domain** (if you have one)
+3. **Configure DNS** as instructed by Vercel
+
+### 🛠️ Troubleshooting Deployment
+
+**Build Fails?**
+- Check all environment variables are set correctly
+- Ensure GitHub repository is public or Vercel has access
+
+**API Not Working?**
+- Verify environment variables are not empty
+- Check API keys are valid and have correct format
+
+**Database Errors?**
+- Ensure Supabase URL and key are correct
+- Database tables auto-create on first API call
+
+**Voice Not Working?**
+- Voice requires HTTPS (works on Vercel automatically)
+- Test on different browsers (Chrome recommended)
 
 ## 🛠️ Local Development
 

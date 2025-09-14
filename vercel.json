@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "indian-health-assistant",
+  "name": "health-assistant-ai",
   "builds": [
     {
       "src": "health_assistant.py",
@@ -49,10 +49,12 @@
     }
   ],
   "env": {
+    "GEMINI_API_KEY": "@gemini_api_key",
+    "HUGGINGFACE_API_KEY": "@huggingface_api_key",
     "OPENAI_API_KEY": "@openai_api_key",
-    "HEALTH_API_KEY": "@health_api_key",
     "SUPABASE_URL": "@supabase_url",
     "SUPABASE_ANON_KEY": "@supabase_anon_key",
+    "HEALTH_API_KEY": "@health_api_key",
     "PYTHON_BACKEND_URL": "@python_backend_url"
   },
   "functions": {
@@ -63,6 +65,16 @@
       "runtime": "nodejs18.x"
     }
   },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
+      ]
+    }
+  ],
   "github": {
     "autoAlias": true
   }
