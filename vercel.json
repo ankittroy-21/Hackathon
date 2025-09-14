@@ -1,0 +1,69 @@
+{
+  "version": 2,
+  "name": "indian-health-assistant",
+  "builds": [
+    {
+      "src": "health_assistant.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
+    },
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/process-health-query",
+      "dest": "/health_assistant.py"
+    },
+    {
+      "src": "/health",
+      "dest": "/health_assistant.py"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*\\.(css|js|ico|png|jpg|jpeg|gif|svg))",
+      "dest": "/$1"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "OPENAI_API_KEY": "@openai_api_key",
+    "HEALTH_API_KEY": "@health_api_key",
+    "SUPABASE_URL": "@supabase_url",
+    "SUPABASE_ANON_KEY": "@supabase_anon_key",
+    "PYTHON_BACKEND_URL": "@python_backend_url"
+  },
+  "functions": {
+    "health_assistant.py": {
+      "runtime": "python3.9"
+    },
+    "api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "github": {
+    "autoAlias": true
+  }
+}
