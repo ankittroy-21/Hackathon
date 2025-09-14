@@ -1,4 +1,5 @@
-const { supabase, initializeDatabase, storeChatMessage } = require('../utils/supabase.js');
+// Simplified API without Supabase dependency for initial deployment
+// const { supabase, initializeDatabase, storeChatMessage } = require('../utils/supabase.js');
 
 // Initialize database on first deployment
 let dbInitialized = false;
@@ -20,10 +21,10 @@ module.exports = async function handler(req, res) {
     }
 
     // Initialize database if not done yet
-    if (!dbInitialized && supabase) {
-        console.log('🔧 Initializing database on first request...');
-        dbInitialized = await initializeDatabase();
-    }
+    // if (!dbInitialized && supabase) {
+    //     console.log('🔧 Initializing database on first request...');
+    //     dbInitialized = await initializeDatabase();
+    // }
 
     try {
         const { 
@@ -47,13 +48,13 @@ module.exports = async function handler(req, res) {
         const sessionId = req.headers['x-session-id'] || 'session-' + Date.now();
 
         // Store user query in database with language context
-        await storeChatMessage(userId, userMessage, 'user', {
-            isVoiceInput,
-            sessionId,
-            category: 'health',
-            detectedLanguage,
-            browserLanguage
-        });
+        // await storeChatMessage(userId, userMessage, 'user', {
+        //     isVoiceInput,
+        //     sessionId,
+        //     category: 'health',
+        //     detectedLanguage,
+        //     browserLanguage
+        // });
 
         // Process the health query with multiple AI providers (Gemini prioritized)
         const response = await processHealthQueryWithAI(userMessage, detectedLanguage);
@@ -63,13 +64,13 @@ module.exports = async function handler(req, res) {
         }
 
         // Store bot response in database with language context
-        await storeChatMessage(userId, response.message || response, 'bot', {
-            isVoiceOutput: requestVoiceResponse,
-            sessionId,
-            category: 'health',
-            confidence: response.confidence || 0.75,
-            language: response.language || detectedLanguage
-        });
+        // await storeChatMessage(userId, response.message || response, 'bot', {
+        //     isVoiceOutput: requestVoiceResponse,
+        //     sessionId,
+        //     category: 'health',
+        //     confidence: response.confidence || 0.75,
+        //     language: response.language || detectedLanguage
+        // });
 
         res.status(200).json({
             message: response.message || response,
