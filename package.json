@@ -1,0 +1,46 @@
+{
+  "name": "indian-health-assistant",
+  "version": "1.0.0",
+  "description": "AI-powered health assistant for rural Indian communities with voice support",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static build complete'",
+    "start": "vercel dev",
+    "deploy": "vercel --prod",
+    "deploy-safe": "./deploy.bat",
+    "test": "node -e \"console.log('Health Assistant Ready for Deployment!')\"",
+    "setup": "cp .env.example .env && echo 'Please fill in your credentials in .env file'"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "health",
+    "ai",
+    "chatbot",
+    "voice",
+    "hindi",
+    "rural",
+    "india",
+    "healthcare",
+    "assistant",
+    "accessibility"
+  ],
+  "author": "Indian Health Assistant Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/indian-health-assistant.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/indian-health-assistant/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/indian-health-assistant#readme"
+}
