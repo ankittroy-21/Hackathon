@@ -58,7 +58,28 @@ class HealthAssistant {
             this.recognition.onerror = (event) => {
                 console.error('Speech recognition error:', event.error);
                 this.stopRecording();
-                this.appendMessage('आवाज़ पहचानने में समस्या हुई। कृपया दोबारा कोशिश करें। 🎤', 'bot');
+                
+                let errorMessage = 'आवाज़ पहचानने में समस्या हुई। कृपया दोबारा कोशिश करें। 🎤';
+                
+                // Specific error handling
+                switch(event.error) {
+                    case 'network':
+                        errorMessage = 'नेटवर्क की समस्या। इंटरनेट कनेक्शन चेक करें। 🌐';
+                        break;
+                    case 'not-allowed':
+                        errorMessage = 'माइक्रोफोन की अनुमति दें। Settings में जाकर microphone access enable करें। 🎤';
+                        break;
+                    case 'no-speech':
+                        errorMessage = 'कोई आवाज़ नहीं सुनाई दी। कृपया फिर से बोलें। 🔇';
+                        break;
+                    case 'audio-capture':
+                        errorMessage = 'माइक्रोफोन उपलब्ध नहीं है। Device settings check करें। 🎙️';
+                        break;
+                    default:
+                        errorMessage = 'आवाज़ पहचानने में समस्या हुई। कृपया दोबारा कोशिश करें। 🎤';
+                }
+                
+                this.appendMessage(errorMessage, 'bot');
             };
             
             this.recognition.onend = () => {
