@@ -12,14 +12,6 @@
     {
       "src": "api/**/*.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "index.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build"
     }
   ],
   "routes": [
@@ -56,14 +48,6 @@
     "SUPABASE_ANON_KEY": "@supabase_anon_key",
     "HEALTH_API_KEY": "@health_api_key",
     "PYTHON_BACKEND_URL": "@python_backend_url"
-  },
-  "functions": {
-    "health_assistant.py": {
-      "runtime": "python3.9"
-    },
-    "api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
   },
   "headers": [
     {
