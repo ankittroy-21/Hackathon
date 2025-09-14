@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "dev": "vercel dev",
-    "build": "echo 'Static build complete'",
+    "build": "echo 'Building Node.js project...' && cp index.html ./index.html",
     "start": "vercel dev",
     "deploy": "vercel --prod",
     "deploy-safe": "./deploy.bat",
