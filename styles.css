@@ -830,4 +830,71 @@ h1 {
     .bot::before {
         border-right-color: #1e293b;
     }
+    
+    .team-credit {
+        background: rgba(30, 30, 30, 0.95);
+        color: #cbd5e1;
+        border-top-color: rgba(64, 64, 64, 0.3);
+    }
+}
+
+/* Team Credit Footer */
+.team-credit {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(224, 224, 224, 0.3);
+    padding: 8px 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #64748b;
+    z-index: 1000;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.team-credit .heart {
+    color: #e11d48;
+    font-size: 1rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    display: inline-block;
+    margin: 0 4px;
+    filter: drop-shadow(0 2px 4px rgba(225, 29, 72, 0.3));
+}
+
+@keyframes heartbeat {
+    0%, 50%, 100% { 
+        transform: scale(1); 
+    }
+    25%, 75% { 
+        transform: scale(1.1); 
+        filter: drop-shadow(0 2px 8px rgba(225, 29, 72, 0.5));
+    }
+}
+
+/* Responsive footer adjustments */
+@media (max-width: 480px) {
+    .team-credit {
+        padding: 6px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .team-credit .heart {
+        font-size: 0.9rem;
+    }
+}
+
+/* Adjust main container to account for footer */
+.container {
+    margin-bottom: 40px;
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin-bottom: 35px;
+    }
 }

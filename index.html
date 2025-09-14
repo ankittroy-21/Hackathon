@@ -154,6 +154,11 @@
     <!-- Main JavaScript -->
     <script src="script.js"></script>
 
+    <!-- Team Credit Footer -->
+    <footer class="team-credit">
+        Made with <span class="heart">❤️</span> by Team XEQT
+    </footer>
+
     <!-- Service Worker for offline support (optional) -->
     <script>
         // Register service worker for PWA functionality
@@ -225,6 +230,60 @@
             .logo-container::before,
             .status-dot {
                 animation: none;
+            }
+        }
+
+        /* Team Credit Footer */
+        .team-credit {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(224, 224, 224, 0.3);
+            padding: 8px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #64748b;
+            z-index: 1000;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        .team-credit .heart {
+            color: #e11d48;
+            font-size: 1rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        @keyframes heartbeat {
+            0%, 50%, 100% { transform: scale(1); }
+            25%, 75% { transform: scale(1.1); }
+        }
+
+        /* Responsive footer adjustments */
+        @media (max-width: 480px) {
+            .team-credit {
+                padding: 6px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .team-credit .heart {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Adjust main container to account for footer */
+        .container {
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin-bottom: 35px;
             }
         }
     </style>
