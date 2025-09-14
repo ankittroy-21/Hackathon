@@ -14,15 +14,29 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     
-    <!-- Hugeicons CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hugeicons@0.0.1/icons.css">
+    <!-- Favicon and app icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+    <meta name="theme-color" content="#667eea">
     
-    <!-- External CSS -->
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Enhanced Google Fonts with Devanagari support -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="script.js" as="script">
+    
+    <!-- PWA manifest for mobile app-like experience -->
+    <link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;Indian Health Assistant&quot;,&quot;short_name&quot;:&quot;Health AI&quot;,&quot;start_url&quot;:&quot;/&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#667eea&quot;,&quot;theme_color&quot;:&quot;#667eea&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]}">
 </head>
 <body>
-    <!-- Background particles -->
-    <div class="particles">
+    <!-- Animated background particles -->
+    <div class="background-particles">
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
@@ -31,76 +45,247 @@
         <div class="particle"></div>
     </div>
 
-    <!-- Main container -->
+    <!-- Main application container -->
     <div class="container">
-        <!-- Header -->
-        <header class="header">
+        <!-- Header section with branding -->
+        <header class="header-container">
             <div class="logo-container">
-                <div class="logo">
-                    <span class="logo-icon">🏥</span>
-                </div>
-                <div class="title-section">
-                    <h1 class="title">भारतीय स्वास्थ्य सहायक</h1>
-                    <p class="subtitle">Indian Health Assistant</p>
-                    <div class="status">
-                        <div class="status-dot"></div>
-                        <span>ऑनलाइन और तैयार • Online & Ready</span>
-                    </div>
-                </div>
+                <div class="logo-icon" role="img" aria-label="Health Assistant Logo">🏥</div>
+            </div>
+            <h1>भारतीय स्वास्थ्य सहायक</h1>
+            <div class="header-subtitle">AI-Powered Health Assistant for India</div>
+            <div class="status-indicator" role="status" aria-live="polite">
+                <div class="status-dot" aria-hidden="true"></div>
+                ऑनलाइन और तैयार • Online & Ready
             </div>
         </header>
 
-        <!-- Chat container -->
-        <main class="chat-container">
-            <div class="chat-history" id="chatHistory">
-                <div class="message bot-message">
-                    <div class="message-content">
-                        <p>नमस्ते! मैं आपका स्वास्थ्य सहायक हूं। आप मुझसे स्वास्थ्य संबंधी कोई भी प्रश्न पूछ सकते हैं।</p>
-                        <p>Hello! I'm your health assistant. You can ask me any health-related questions.</p>
-                    </div>
+        <!-- Chat history area -->
+        <main class="chat-history" 
+              id="chatHistory" 
+              role="log" 
+              aria-live="polite" 
+              aria-label="Chat conversation">
+            <div class="message bot" role="article">
+                <div class="message-content">
+                    नमस्ते! मैं आपका AI स्वास्थ्य सहायक हूँ। 🙏
+                    <br><br>
+                    <strong>मैं आपकी कैसे मदद कर सकता हूँ?</strong>
+                    <br><br>
+                    आप मुझसे किसी भी बीमारी या स्वास्थ्य समस्या के बारे में पूछ सकते हैं:
+                    <br>
+                    • <strong>हिंदी में</strong> - "सिरदर्द का इलाज क्या है?"
+                    <br>
+                    • <strong>English में</strong> - "What is the treatment for diabetes?"
+                    <br>
+                    • <strong>Voice में</strong> - माइक बटन दबाकर बोलें
+                    <br><br>
+                    <em>गोपनीयता सुरक्षित है। Privacy protected.</em>
                 </div>
             </div>
-
-            <!-- Input area -->
-            <div class="input-bar">
-                <form id="chatForm">
-                    <div class="input-container">
-                        <input 
-                            type="text" 
-                            id="messageInput" 
-                            placeholder="अपना स्वास्थ्य प्रश्न यहाँ लिखें... / Type your health question here..." 
-                            aria-label="Health question input"
-                            autocomplete="off"
-                        >
-                    </div>
-                    
-                    <button type="button" class="voice-button" id="voiceButton" aria-label="Voice input">
-                        <svg class="voice-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
-                        </svg>
-                        <div class="voice-animation">
-                            <div class="pulse-ring"></div>
-                            <div class="pulse-ring"></div>
-                            <div class="pulse-ring"></div>
-                        </div>
-                    </button>
-                    
-                    <button type="submit" class="send-button" id="sendButton" aria-label="Send message">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                        </svg>
-                    </button>
-                </form>
-            </div>
         </main>
+
+        <!-- Input area with voice and text support -->
+        <footer class="input-bar">
+            <form id="chatForm" autocomplete="off" role="search">
+                <div class="input-container">
+                    <label for="userInput" class="sr-only">Enter your health question</label>
+                    <input 
+                        type="text" 
+                        id="userInput" 
+                        name="userInput"
+                        placeholder="अपना स्वास्थ्य प्रश्न यहाँ लिखें... / Type your health question..."
+                        aria-describedby="input-help"
+                        maxlength="500"
+                        autocomplete="off"
+                        spellcheck="true"
+                    />
+                    <div id="input-help" class="sr-only">
+                        You can type your question in Hindi, English, or Hinglish
+                    </div>
+                </div>
+
+                <button 
+                    type="button" 
+                    class="voice-button" 
+                    id="voiceButton"
+                    title="Voice Input (आवाज़ में बोलें)"
+                    aria-label="Start voice input"
+                    aria-pressed="false"
+                >
+                    <div class="icon-container">
+                        <!-- Hugeicons Mic01Icon -->
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                            <path d="M12 1C10.3431 1 9 2.34315 9 4V12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12V4C15 2.34315 13.6569 1 12 1Z" fill="currentColor"/>
+                            <path d="M8 10V12C8 15.3137 10.6863 18 14 18H16V20H14C9.58172 20 6 16.4183 6 12V10H8Z" fill="currentColor"/>
+                            <path d="M18 10V12C18 16.4183 14.4183 20 10 20H8V18H10C13.3137 18 16 15.3137 16 12V10H18Z" fill="currentColor"/>
+                            <path d="M11 21H13V23H11V21Z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                </button>
+
+                <button 
+                    type="submit" 
+                    class="send-button" 
+                    id="sendButton"
+                    title="Send Message (भेजें)"
+                    aria-label="Send message"
+                >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                        <path d="M7.39999 6.32003L15.89 3.49003C19.7 2.22003 21.77 4.30003 20.51 8.11003L17.68 16.6C15.78 22.31 12.66 22.31 10.76 16.6L9.91999 14.08L7.39999 13.24C1.68999 11.34 1.68999 8.23003 7.39999 6.32003Z" fill="currentColor"/>
+                        <path d="M10.11 13.6501L13.69 10.0601" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </form>
+        </footer>
     </div>
 
-    <!-- Team credit -->
+    <!-- Screen reader only content for accessibility -->
+    <div class="sr-only">
+        <h2>How to use this health assistant:</h2>
+        <ul>
+            <li>Type your health question in Hindi, English, or Hinglish</li>
+            <li>Click the microphone button to use voice input</li>
+            <li>Press Enter or click Send to submit your question</li>
+            <li>Responses will be provided in the same language as your input</li>
+        </ul>
+    </div>
+
+    <!-- Main JavaScript -->
+    <script src="script.js"></script>
+
+    <!-- Team Credit Footer -->
     <footer class="team-credit">
         Made with <span class="heart">❤️</span> by Team XEQT
     </footer>
 
-    <!-- External JavaScript -->
-    <script src="script.js"></script>
+    <!-- Service Worker for offline support (optional) -->
+    <script>
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+
+    <!-- Error boundary for graceful degradation -->
+    <script>
+        window.addEventListener('error', (event) => {
+            console.error('Global error:', event.error);
+            // Show user-friendly error message
+            const errorMsg = document.createElement('div');
+            errorMsg.style.cssText = `
+                position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+                background: #ef4444; color: white; padding: 12px 24px; border-radius: 24px;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.2); z-index: 9999; font-size: 14px;
+            `;
+            errorMsg.textContent = 'Technical issue detected. Please refresh the page.';
+            document.body.appendChild(errorMsg);
+            setTimeout(() => errorMsg.remove(), 5000);
+        });
+    </script>
+
+    <!-- Additional styles for screen reader only content -->
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Ensure proper focus indicators for accessibility */
+        .voice-button:focus,
+        .send-button:focus,
+        .input-bar input:focus {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+        }
+        
+        /* High contrast mode improvements */
+        @media (prefers-contrast: high) {
+            .message {
+                border: 2px solid;
+            }
+            .voice-button, .send-button {
+                border: 2px solid currentColor;
+            }
+        }
+        
+        /* Reduce animations for users who prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .particle,
+            .logo-container::before,
+            .status-dot {
+                animation: none;
+            }
+        }
+
+        /* Team Credit Footer */
+        .team-credit {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(224, 224, 224, 0.3);
+            padding: 8px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #64748b;
+            z-index: 1000;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        .team-credit .heart {
+            color: #e11d48;
+            font-size: 1rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        @keyframes heartbeat {
+            0%, 50%, 100% { transform: scale(1); }
+            25%, 75% { transform: scale(1.1); }
+        }
+
+        /* Responsive footer adjustments */
+        @media (max-width: 480px) {
+            .team-credit {
+                padding: 6px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .team-credit .heart {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Adjust main container to account for footer */
+        .container {
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin-bottom: 35px;
+            }
+        }
+    </style>
 </body>
 </html>
