@@ -1,9 +1,9 @@
-import { supabase, initializeDatabase, storeChatMessage } from '../utils/supabase.js';
+const { supabase, initializeDatabase, storeChatMessage } = require('../utils/supabase.js');
 
 // Initialize database on first deployment
 let dbInitialized = false;
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     // Enable CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');

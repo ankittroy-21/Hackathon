@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+const { createClient } = require('@supabase/supabase-js');
 
 const supabaseUrl = process.env.SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_ANON_KEY || '';
@@ -7,10 +7,10 @@ if (!supabaseUrl || !supabaseKey) {
     console.warn('Supabase credentials not found. Database features will be disabled.');
 }
 
-export const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 // Automated database setup function
-export async function initializeDatabase() {
+async function initializeDatabase() {
     if (!supabase) {
         console.warn('Supabase not initialized. Skipping database setup.');
         return false;
@@ -138,7 +138,7 @@ async function createStoredProcedures() {
 }
 
 // Health-focused chat storage function
-export async function storeChatMessage(userId, message, messageType, options = {}) {
+async function storeChatMessage(userId, message, messageType, options = {}) {
     if (!supabase) {
         console.warn('Supabase not available. Message not stored.');
         return null;
@@ -175,7 +175,7 @@ export async function storeChatMessage(userId, message, messageType, options = {
 }
 
 // Get chat history for analytics
-export async function getChatHistory(userId, limit = 50) {
+async function getChatHistory(userId, limit = 50) {
     if (!supabase) return [];
 
     try {
@@ -197,3 +197,10 @@ export async function getChatHistory(userId, limit = 50) {
         return [];
     }
 }
+
+module.exports = {
+    supabase,
+    initializeDatabase,
+    storeChatMessage,
+    getChatHistory
+};
